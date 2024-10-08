@@ -1,0 +1,85 @@
+/* Styling the main container */
+.container {
+    margin-top: 40px;
+  }
+  
+  /* Styling for the header */
+  h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #333;
+  }
+  
+  /* Styling for the form section */
+  .form-container {
+    background-color: #00e676;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+  }
+  
+  /* Form elements */
+  .form-container input,
+  .form-container button {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  /* Button styling */
+  .form-container button {
+    background-color: #1e88e5;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .form-container button:hover {
+    background-color: #1565c0;
+  }
+  
+  /* Styling for the todo items */
+  .list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-radius: 8px;
+    color: white;
+    font-size: 1.5rem;
+  }
+  
+  .list-group-item.primary {
+    background-color: #8e24aa;
+  }
+  
+  .list-group-item.success {
+    background-color: #fdd835;
+  }
+  
+  .list-group-item.warning {
+    background-color: #ffb300;
+  }
+  
+  .list-group-item.danger {
+    background-color: #e53935;
+  }
+  
+  /* Styling for the description and due date */
+  .tab-pane h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+  
+  .tab-pane input[type="date"] {
+    width: 100%;
+    font-size: 1rem;
+    padding: 10px;
+    margin-top: 10px;
+  }
+  
