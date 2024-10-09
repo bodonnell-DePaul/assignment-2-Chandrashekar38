@@ -47,8 +47,8 @@ const TodoList = () => {
 
   return (
     <Container>
-      <h1 className="text-center my-4">Assignment 2: Chandrashekar's ToDo List</h1>
-      <Row>
+<h1 className="text-center my-4">Assignment 2: ToDo List</h1>
+<Row>
         <Col md={4}>
           <Form onSubmit={addTodo} className="form-container">
             <Form.Group controlId="newTodoItem">
