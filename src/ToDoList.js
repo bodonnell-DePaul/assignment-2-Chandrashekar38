@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Tab, Tabs, ListGroup, Container, Row, Col, Form, Button } from 'react-bootstrap';
-import './index.css'; // Custom styling for layout
+import { Container, Row, Col, Form, Button, ListGroup, Tab } from 'react-bootstrap';
+import './index.css';
 
 const todoItems = [
   { title: 'Todo 1', description: 'Description for Todo 1', dueDate: '2024-10-20' },
@@ -15,13 +15,12 @@ const TodoList = () => {
 
   const getVariant = (dueDate) => {
     const currentDate = new Date();
-    const dueDateObj = new Date(dueDate);
-    const diffTime = dueDateObj - currentDate;
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    const itemDueDate = new Date(dueDate);
+    const diffInDays = (itemDueDate - currentDate) / (1000 * 60 * 60 * 24);
 
-    if (diffDays > 7) return 'primary';
-    if (diffDays <= 7 && diffDays > 4) return 'success';
-    if (diffDays <= 4 && diffDays > 2) return 'warning';
+    if (diffInDays > 7) return 'primary';
+    if (diffInDays <= 7 && diffInDays >= 4) return 'success';
+    if (diffInDays < 4 && diffInDays >= 2) return 'warning';
     return 'danger';
   };
 
@@ -33,22 +32,22 @@ const TodoList = () => {
     }
   };
 
-  const handleDescriptionChange = (index, event) => {
+  const handleDescriptionChange = (index, newDescription) => {
     const updatedTodos = [...todos];
-    updatedTodos[index].description = event.target.textContent;
+    updatedTodos[index].description = newDescription;
     setTodos(updatedTodos);
   };
 
-  const handleDueDateChange = (index, event) => {
+  const handleDueDateChange = (index, newDueDate) => {
     const updatedTodos = [...todos];
-    updatedTodos[index].dueDate = event.target.value;
+    updatedTodos[index].dueDate = newDueDate;
     setTodos(updatedTodos);
   };
 
   return (
     <Container>
-<h1 className="text-center my-4">Assignment 2: ToDo List</h1>
-<Row>
+      <h1 className="text-center">Assignment 2: ToDo List</h1>
+      <Row className="justify-content-center">
         <Col md={4}>
           <Form onSubmit={addTodo} className="form-container">
             <Form.Group controlId="newTodoItem">
@@ -71,16 +70,17 @@ const TodoList = () => {
             <Button type="submit" className="btn-primary mt-3">Add Todo</Button>
           </Form>
         </Col>
-        <Col md={8}>
-          <Tab.Container id="todo-tabs" defaultActiveKey="#todo1">
+
+        <Col md={6}>
+          <Tab.Container defaultActiveKey="#todo1">
             <Row>
               <Col sm={4}>
                 <ListGroup>
                   {todos.map((todo, index) => (
                     <ListGroup.Item
-                      key={index}
                       action
                       href={`#todo${index + 1}`}
+                      key={index}
                       variant={getVariant(todo.dueDate)}
                     >
                       {todo.title}
@@ -92,13 +92,13 @@ const TodoList = () => {
                 <Tab.Content>
                   {todos.map((todo, index) => (
                     <Tab.Pane eventKey={`#todo${index + 1}`} key={index}>
-                      <h3 contentEditable={true} onBlur={(e) => handleDescriptionChange(index, e)}>
+                      <h3 contentEditable onBlur={(e) => handleDescriptionChange(index, e.target.textContent)}>
                         {todo.description}
                       </h3>
                       <Form.Control
                         type="date"
                         value={todo.dueDate}
-                        onChange={(e) => handleDueDateChange(index, e)}
+                        onChange={(e) => handleDueDateChange(index, e.target.value)}
                       />
                     </Tab.Pane>
                   ))}
